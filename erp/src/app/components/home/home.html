@@ -1,0 +1,9 @@
+<main class="page"><p class="eyebrow">PANEL PRINCIPAL</p><h1>Bienvenido, {{auth.usuario()?.nombre}}</h1><p>Tu inicio de sesión fue correcto. Tienes acceso como administrador.</p>
+ <section class="profile"><h2>Tus datos registrados</h2><dl><dt>ID</dt><dd>{{auth.usuario()?.id}}</dd><dt>Nombre</dt><dd>{{auth.usuario()?.nombre}}</dd><dt>Correo</dt><dd>{{auth.usuario()?.correo}}</dd><dt>Rol</dt><dd>{{auth.usuario()?.rol}}</dd><dt>Estado</dt><dd>{{auth.usuario()?.estado}}</dd></dl></section>
+ <h2>Áreas de la cafetería</h2><div class="module-grid">
+ <a routerLink="/ventas"><strong>Ventas y facturación</strong><span>Productos, pedidos y cobro de demostración →</span></a>
+ <a routerLink="/compras"><strong>Compras y proveedores</strong><span>Órdenes y contactos →</span></a>
+ <a routerLink="/inventario"><strong>Inventario y almacén</strong><span>Insumos y existencias →</span></a>
+ <a routerLink="/rrhh"><strong>Recursos humanos</strong><span>Personal y turnos →</span></a>
+ <a routerLink="/contabilidad"><strong>Contabilidad y finanzas</strong><span>Ingresos y egresos →</span></a>
+ </div></main>

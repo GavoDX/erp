@@ -1,0 +1,75 @@
+<div class="modulo">
+  <div class="encabezado">
+    <span class="ruta">INVENTARIO / ALMACÉN</span>
+    <h1>Inventario y Almacén</h1>
+  </div>
+
+  @if (error()) {
+    <p class="aviso-error">{{ error() }}</p>
+  }
+
+  <div class="tarjetas">
+    <div class="tarjeta">
+      <span class="etiqueta">Insumos activos</span>
+      <span class="valor">{{ insumos().length }}</span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Stock bajo mínimo</span>
+      <span class="valor negativo">{{ stockBajo() }}</span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Valor de inventario</span>
+      <span class="valor positivo">${{ valorInventario() | number: '1.2-2' }}</span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Órdenes pendientes</span>
+      <span class="valor alerta">3</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="acciones">
+        <button class="btn-primario" disabled title="Alta fuera del alcance de la práctica de autenticación">+ Nuevo insumo (demostración)</button>
+        <button class="btn-secundario" (click)="exportar()">Exportar CSV</button>
+      </div>
+    </div>
+
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Insumo</th>
+          <th>Categoría</th>
+          <th>Stock actual</th>
+          <th>Mínimo</th>
+          <th>Nivel</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (i of insumos(); track i.nombre) {
+          <tr>
+            <td class="fuerte">{{ i.nombre }}</td>
+            <td>{{ i.categoria }}</td>
+            <td>{{ i.stockActual }} {{ i.unidad }}</td>
+            <td>{{ i.stockMinimo }} {{ i.unidad }}</td>
+            <td>
+              <div class="barra-fondo">
+                <div
+                  class="barra-nivel"
+                  [class.barra-baja]="estado(i) === 'Bajo'"
+                  [style.width.%]="nivel(i)"
+                ></div>
+              </div>
+            </td>
+            <td>
+              <span class="badge" [class.badge-verde]="estado(i) === 'OK'" [class.badge-rojo]="estado(i) === 'Bajo'">
+                {{ estado(i) }}
+              </span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

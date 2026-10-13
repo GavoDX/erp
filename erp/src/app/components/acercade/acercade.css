@@ -1,0 +1,32 @@
+.sec1{
+    min-height: 80vh;
+
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 80px 10%;
+}
+.sec1 h1{
+    color: #3B2721;
+    font-size: 60px;
+    margin: 10px 0;
+}
+.sec1 h2{
+    color: #E07A3F;
+    font-size: 28px;
+    max-width: 600px;
+}
+.sec1 p{
+    color: #3B2721;
+    font-size: 26px;
+    line-height: 1.6;
+    font-weight: bold;
+    max-width: 600px;
+}
+.foto{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(59, 39, 33, 0.25);
+}

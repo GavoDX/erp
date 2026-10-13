@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.presentacion {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 0 10px;
+}
+
+.presentacion a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid #E9B44C;
+    border-radius: 15px;
+    font-size: 18px;
+    color: #3B2721;
+    transition: transform 0.3s ease;
+    text-align: center;
+    display: inline-block;
+    background-color: #C8553D;
+}
+
+.presentacion a:hover {
+    transform: scale(1.15);
+}
+
+.presentacion a.active {
+    background-color: #E9B44C;
+}

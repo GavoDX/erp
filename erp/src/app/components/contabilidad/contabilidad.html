@@ -1,0 +1,66 @@
+<div class="modulo">
+  <div class="encabezado">
+    <span class="ruta">CONTABILIDAD / RESUMEN GENERAL</span>
+    <h1>Contabilidad y Finanzas</h1>
+  </div>
+
+  @if (error()) {
+    <p class="aviso-error">{{ error() }}</p>
+  }
+
+  <div class="tarjetas">
+    <div class="tarjeta">
+      <span class="etiqueta">Ingresos del mes</span>
+      <span class="valor positivo">${{ totalIngresos() | number: '1.2-2' }}</span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Egresos del mes</span>
+      <span class="valor negativo">${{ totalEgresos() | number: '1.2-2' }}</span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Utilidad neta</span>
+      <span class="valor" [class.positivo]="utilidadNeta() >= 0" [class.negativo]="utilidadNeta() < 0">
+        ${{ utilidadNeta() | number: '1.2-2' }}
+      </span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Cuentas por pagar</span>
+      <span class="valor alerta">${{ cuentasPorPagar | number: '1.2-2' }}</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2>Movimientos contables</h2>
+      <button class="btn-secundario" (click)="exportar()">Exportar CSV</button>
+    </div>
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Concepto</th>
+          <th>Categoría</th>
+          <th>Tipo</th>
+          <th>Monto</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (m of movimientos(); track m.concepto + m.fecha) {
+          <tr>
+            <td>{{ m.fecha }}</td>
+            <td>{{ m.concepto }}</td>
+            <td>{{ m.categoria }}</td>
+            <td>
+              <span class="badge" [class.badge-verde]="m.tipo === 'Ingreso'" [class.badge-rojo]="m.tipo === 'Egreso'">
+                {{ m.tipo }}
+              </span>
+            </td>
+            <td [class.positivo]="m.tipo === 'Ingreso'" [class.negativo]="m.tipo === 'Egreso'">
+              {{ m.tipo === 'Egreso' ? '-' : '' }}${{ m.monto | number: '1.2-2' }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

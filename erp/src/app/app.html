@@ -1,0 +1,9 @@
+<header class="topbar"><span class="brand">EL GRANO <small>Cafetería</small></span>
+ @if(auth.usuario(); as user){<div class="account"><span>{{user.nombre}} · {{user.rol}}</span><button (click)="logout()" [disabled]="closing()">{{closing()?'Cerrando…':'Cerrar sesión'}}</button></div>}
+</header>
+@if(error()){<p class="error" role="alert">{{error()}}</p>}
+@if(auth.usuario()?.rol==='administrador'){
+ <nav class="presentacion" aria-label="Menú principal"><a routerLink="/home" routerLinkActive="active">Inicio</a><a routerLink="/ventas" routerLinkActive="active">Ventas</a><a routerLink="/compras" routerLinkActive="active">Compras</a><a routerLink="/inventario" routerLinkActive="active">Inventario</a><a routerLink="/rrhh" routerLinkActive="active">RRHH</a><a routerLink="/contabilidad" routerLinkActive="active">Contabilidad</a><a routerLink="/acercade" routerLinkActive="active">Acerca de</a></nav>
+ <aside class="demo-banner">Práctica de autenticación: los módulos del ERP contienen datos de demostración. Los pedidos se reinician al apagar la API.</aside>
+}
+<router-outlet />

@@ -1,0 +1,149 @@
+.modulo {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #3B2721;
+}
+
+.encabezado {
+    margin-bottom: 20px;
+}
+
+.ruta {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: #A9754B;
+    text-transform: uppercase;
+}
+
+.encabezado h1 {
+    font-size: 2rem;
+    margin-top: 4px;
+}
+
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.tarjeta {
+    background-color: #FFFFFF;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 12px rgba(59, 39, 33, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.etiqueta {
+    font-size: 0.85rem;
+    color: #8A6A57;
+}
+
+.valor {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.valor.positivo {
+    color: #2E7D32;
+}
+
+.valor.negativo {
+    color: #C8553D;
+}
+
+.valor.alerta {
+    color: #E9B44C;
+}
+
+.panel {
+    background-color: #FFFFFF;
+    border-radius: 14px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 12px rgba(59, 39, 33, 0.12);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.panel-header h2 {
+    font-size: 1.2rem;
+}
+
+.btn-secundario {
+    background-color: #FFF4E6;
+    border: 1px solid #E9B44C;
+    color: #3B2721;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-secundario:hover {
+    background-color: #E9B44C;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th {
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #A9754B;
+    padding: 8px 6px;
+    border-bottom: 2px solid #FFF4E6;
+}
+
+.tabla td {
+    padding: 10px 6px;
+    border-bottom: 1px solid #FFF4E6;
+    font-size: 0.95rem;
+}
+
+.badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.badge-verde {
+    background-color: #E3F2E1;
+    color: #2E7D32;
+}
+
+.badge-rojo {
+    background-color: #FBE3DE;
+    color: #C8553D;
+}
+
+.positivo {
+    color: #2E7D32;
+}
+
+.negativo {
+    color: #C8553D;
+}
+
+.aviso-error {
+  background: #fdecea;
+  color: #b3261e;
+  border: 1px solid #f2b8b5;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}

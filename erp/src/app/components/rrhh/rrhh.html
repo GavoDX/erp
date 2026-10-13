@@ -1,0 +1,73 @@
+<div class="modulo">
+  <div class="encabezado">
+    <span class="ruta">RRHH / PERSONAL</span>
+    <h1>Recursos Humanos</h1>
+  </div>
+
+  @if (error()) {
+    <p class="aviso-error">{{ error() }}</p>
+  }
+
+  <div class="tarjetas">
+    <div class="tarjeta">
+      <span class="etiqueta">Empleados activos</span>
+      <span class="valor positivo">{{ activos() }}</span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Total en nómina</span>
+      <span class="valor">{{ empleados().length }}</span>
+    </div>
+  </div>
+
+  <div class="dos-columnas">
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Empleados</h2>
+        <button class="btn-primario" disabled title="Alta fuera del alcance de la práctica de autenticación">+ Nuevo empleado (demostración)</button>
+      </div>
+      <div class="lista-empleados">
+        @for (e of empleados(); track e.nombre) {
+          <div class="empleado-card">
+            <div class="avatar"></div>
+            <div class="empleado-info">
+              <span class="empleado-nombre">{{ e.nombre }}</span>
+              <span class="empleado-puesto">{{ e.puesto }}</span>
+              <span class="empleado-turno">{{ e.turno }}</span>
+            </div>
+            <span class="badge" [class.badge-verde]="e.estado === 'Activo'" [class.badge-ambar]="e.estado === 'En descanso'">
+              {{ e.estado }}
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Calendario semanal de turnos</h2>
+      </div>
+      <table class="calendario">
+        <thead>
+          <tr>
+            <th></th>
+            @for (d of dias; track d) {
+              <th>{{ d }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (fila of calendario; track fila.turno) {
+            <tr>
+              <td class="fuerte">{{ fila.turno }}</td>
+              @for (activo of fila.dias; track $index) {
+                <td>
+                  <span class="celda" [class]="activo ? fila.color : ''"></span>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<div class="modulo">
+  <div class="encabezado">
+    <span class="ruta">COMPRAS / ÓRDENES</span>
+    <h1>Compras y Proveedores</h1>
+  </div>
+
+  @if (error()) {
+    <p class="aviso-error">{{ error() }}</p>
+  }
+
+  <div class="tarjetas">
+    <div class="tarjeta">
+      <span class="etiqueta">Órdenes pendientes</span>
+      <span class="valor alerta">{{ pendientes() }}</span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Recibidas este mes</span>
+      <span class="valor positivo">{{ recibidas() }}</span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Proveedores activos</span>
+      <span class="valor">{{ proveedores().length }}</span>
+    </div>
+    <div class="tarjeta">
+      <span class="etiqueta">Gasto total del mes</span>
+      <span class="valor negativo">${{ gastoTotal() | number: '1.2-2' }}</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="tabs">
+        <button class="tab" [class.tab-activo]="!vistaProveedores()" (click)="alternarVista(false)">Órdenes de compra</button>
+        <button class="tab" [class.tab-activo]="vistaProveedores()" (click)="alternarVista(true)">Proveedores</button>
+      </div>
+      <button class="btn-primario" disabled title="Alta fuera del alcance de la práctica de autenticación">+ Nueva orden (demostración)</button>
+    </div>
+
+    @if (!vistaProveedores()) {
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Orden</th>
+            <th>Proveedor</th>
+            <th>Insumos</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (o of ordenes(); track o.orden) {
+            <tr>
+              <td class="fuerte">{{ o.orden }}</td>
+              <td>{{ o.proveedor }}</td>
+              <td>{{ o.insumos }}</td>
+              <td>{{ o.fecha }}</td>
+              <td>${{ o.total | number: '1.2-2' }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [class.badge-ambar]="o.estado === 'Pendiente'"
+                  [class.badge-verde]="o.estado === 'Recibida'"
+                  [class.badge-rojo]="o.estado === 'Cancelada'"
+                >
+                  {{ o.estado }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Proveedor</th>
+            <th>Contacto</th>
+            <th>Categoría</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of proveedores(); track p.nombre) {
+            <tr>
+              <td class="fuerte">{{ p.nombre }}</td>
+              <td>{{ p.contacto }}</td>
+              <td>{{ p.categoria }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
+</div>

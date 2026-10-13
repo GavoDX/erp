@@ -1,0 +1,99 @@
+<div class="modulo">
+  <div class="encabezado">
+    <span class="ruta">VENTAS / PUNTO DE VENTA</span>
+    <h1>Ventas y Facturación</h1>
+  </div>
+
+  @if (error()) {
+    <p class="aviso-error">{{ error() }}</p>
+  }
+
+  <div class="pos">
+    <div class="catalogo">
+      <div class="filtros">
+        @for (cat of categorias; track cat) {
+          <button class="filtro" [class.filtro-activo]="categoriaActiva() === cat" (click)="filtrarPorCategoria(cat)">
+            {{ cat }}
+          </button>
+        }
+      </div>
+
+      <div class="grid-productos">
+        @for (p of productosFiltrados(); track p.nombre) {
+          <div class="producto-card">
+            <span class="producto-nombre">{{ p.nombre }}</span>
+            <span class="producto-precio">${{ p.precio | number: '1.2-2' }}</span>
+            <button class="btn-agregar" (click)="agregarProducto(p)">+</button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="carrito">
+      <div class="carrito-header">
+        <h2>Pedido actual</h2>
+        <span class="badge-estado">En preparación</span>
+      </div>
+
+      @if (pedido().length === 0) {
+        <p class="carrito-vacio">Agrega productos del catálogo para iniciar un pedido.</p>
+      } @else {
+        <div class="lista-pedido">
+          @for (i of pedido(); track i.nombre) {
+            <div class="item-pedido">
+              <span>{{ i.cantidad }}x {{ i.nombre }}</span>
+              <span class="item-precio">
+                ${{ i.precio * i.cantidad | number: '1.2-2' }}
+                <button class="btn-quitar" (click)="quitarProducto(i.nombre)">×</button>
+              </span>
+            </div>
+          }
+        </div>
+
+        <div class="totales">
+          <div class="fila-total"><span>Subtotal</span><span>${{ subtotal() | number: '1.2-2' }}</span></div>
+          <div class="fila-total"><span>Descuento (10% cliente frecuente)</span><span>-${{ descuento() | number: '1.2-2' }}</span></div>
+          <div class="fila-total fila-final"><span>Total</span><span>${{ total() | number: '1.2-2' }}</span></div>
+        </div>
+
+        <div class="metodos">
+          @for (m of metodosPago; track m) {
+            <button class="metodo" [class.metodo-activo]="metodoPago() === m" (click)="seleccionarMetodo(m)">
+              {{ m }}
+            </button>
+          }
+        </div>
+
+        <button class="btn-cobrar" (click)="cobrar()" [disabled]="cobrando() || pedido().length === 0">Cobrar ${{ total() | number: '1.2-2' }}</button>
+      }
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <h2>Facturas recientes</h2>
+    </div>
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Folio</th>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Método</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (f of facturas(); track f.folio) {
+          <tr>
+            <td class="fuerte">{{ f.folio }}</td>
+            <td>{{ f.cliente }}</td>
+            <td>{{ f.fecha }}</td>
+            <td>{{ f.metodo }}</td>
+            <td>${{ f.total | number: '1.2-2' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
